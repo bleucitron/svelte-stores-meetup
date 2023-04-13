@@ -1,18 +1,13 @@
 <script>
-  export let basket = {};
-  export let clearBasket;
-  export let removeFromBasket;
+  import { basket } from './stores';
 
-  $: items = Object.values(basket);
-  $: total = items
-    .map(i => i.qty * i.price)
-    .reduce((acc, price) => acc + price, 0);
+  $: items = Object.values($basket);
 
   $: formattedTotal = new Intl.NumberFormat('fr', {
     style: 'currency',
     currency: 'EUR',
     maximumSignificantDigits: 2,
-  }).format(total);
+  }).format($basket.total);
 </script>
 
 <div>
@@ -23,7 +18,7 @@
         {qty}
         x
         {price} €
-        <button on:click={() => removeFromBasket(id)}>Supprimer</button>
+        <button on:click={() => basket.remove(id)}>Supprimer</button>
       </li>
     {:else}
       <p>Vide</p>
@@ -31,7 +26,7 @@
   </ul>
   {#if items.length}
     <p>Total: {formattedTotal}</p>
-    <button on:click={clearBasket}>Vider le panier</button>
+    <button on:click={basket.clear}>Vider le panier</button>
   {/if}
 </div>
 

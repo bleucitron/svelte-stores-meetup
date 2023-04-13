@@ -1,9 +1,9 @@
 <script>
+  import { basket } from './stores';
   const MAX = 10;
 
   export let id;
   export let value = 0;
-  export let addToBasket;
 
   function increment() {
     if (value < MAX) {
@@ -16,7 +16,7 @@
     }
   }
   function add() {
-    addToBasket(id, value);
+    basket.add(id, value);
     value = 0;
   }
 </script>

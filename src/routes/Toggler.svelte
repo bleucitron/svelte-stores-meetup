@@ -1,12 +1,14 @@
 <script>
+  import { basket } from './stores';
   export let open;
-  export let total;
+
+  $: ({ total } = basket);
 
   $: formattedTotal = new Intl.NumberFormat('fr', {
     style: 'currency',
     currency: 'EUR',
     maximumSignificantDigits: 2,
-  }).format(total);
+  }).format($total);
 </script>
 
 <button on:click>
