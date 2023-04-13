@@ -15,7 +15,7 @@
       const item = data.find(i => i.id === id);
       basket[id] = {
         ...item,
-        qty: 1,
+        qty,
       };
     }
   }

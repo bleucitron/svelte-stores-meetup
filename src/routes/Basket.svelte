@@ -7,6 +7,12 @@
   $: total = items
     .map(i => i.qty * i.price)
     .reduce((acc, price) => acc + price, 0);
+
+  $: formattedTotal = new Intl.NumberFormat('fr', {
+    style: 'currency',
+    currency: 'EUR',
+    maximumSignificantDigits: 2,
+  }).format(total);
 </script>
 
 <div>
@@ -24,7 +30,7 @@
     {/each}
   </ul>
   {#if items.length}
-    <p>Total: {total} €</p>
+    <p>Total: {formattedTotal}</p>
     <button on:click={clearBasket}>Vider le panier</button>
   {/if}
 </div>
